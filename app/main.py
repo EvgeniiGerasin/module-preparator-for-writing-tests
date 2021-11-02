@@ -23,7 +23,7 @@ PATHS = (
 )
 
 
-def check_exists(path_to: str, PATHS: tuple) -> str:
+def check_exists(path_to: str, PATHS: tuple) -> list:
     """Проверяет наличие директорий и файлов в них
 
     Args:
@@ -32,20 +32,67 @@ def check_exists(path_to: str, PATHS: tuple) -> str:
     - PATH: пути, которые проверяются
 
     Returns:
-    - not_exists_paths: отформатированная строка для вывода
-    путей, которые не существуют
+    - [exists_flag (bool), not_exists_paths(str)]: если пути существуют
+    то exists_flag = True, not_exists_paths отформатированная
+    строка для вывода путей, которые не существуют
     """
     not_exists_paths = ''
+    exists_flag = True
     for path in PATHS:
         if not os.path.exists(path_to + path):
-            not_exists_paths += "Not exists --> {} \n".format(path)
-    return not_exists_paths
+            exists_flag = False
+            not_exists_paths += "not exists --> {} \n".format(path)
+    return [exists_flag, not_exists_paths]
+
+
+def create_objects(
+    path_to: str,
+    name_modul: str,
+    data_file: bool = True,
+    test_file: bool = False
+) -> str:
+    """Функция для создания указанных объектов в проекте
+
+    Args:
+    - path_to: путь до директории, в кторой нужно проверить
+    существование директорий и создать объекты
+    - name_modul: имя модуля для создания
+    - data_file (optional): создать data.py. Defaults to True.
+    - test_file (optional): создать test_name_modul.py. 
+    Defaults to False.
+
+    Returns:
+    """
+    PATH_TO_SOURSE = path_to + '/source/'
+    PATH_TO_TEST = path_to + '/tests/'
+    if check_exists(PATH_TO_SOURSE, (name_modul,))[0]:
+        print("already exists ->", name_modul)
+    else:
+        Path(PATH_TO_SOURSE + name_modul).mkdir(
+            parents=True,
+            exist_ok=False
+        )
+        Path(PATH_TO_SOURSE + name_modul + '/task.py').touch(
+            exist_ok=False
+        )
+        Path(PATH_TO_SOURSE + name_modul + '/locator.py').touch(
+            exist_ok=False
+        )
+        if data_file:
+            Path(PATH_TO_SOURSE + name_modul + '/data.py').touch(
+                exist_ok=False
+            )
 
 
 def main():
     path: str = "/home/evgenii/Work/edu-eschool/"
-    check = check_exists(path, PATHS)
-    print(check)
+    # check = check_exists(path, PATHS)
+    # print(check)
+    create_objects(
+        '/home/evgenii/python-code/other/module-preparator-for-writing-tests',
+        'class_journal',
+        True,
+    )
 
 
 if __name__ == "__main__":
