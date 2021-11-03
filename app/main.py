@@ -8,6 +8,7 @@ import argparse
 def main():
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('path', help='path to project', type=str)
     parser.add_argument(
         '-c', '--check',
         help='сhecking modules in a project',
@@ -18,9 +19,7 @@ def main():
         type=str,
         help='create new module',
         metavar='<name_module>'
-
     )
-    parser.add_argument('path', help='path to project', type=str)
     args = parser.parse_args()
 
     print(args)
@@ -28,7 +27,9 @@ def main():
     # проверка проекта на наличие модулей
     if args.check:
         lib.check(args.path)
-
+    # создание директории и файлов в каталоге source
+    if args.source:
+        lib.create_sourse_files(args.path, args.source)
 
 if __name__ == "__main__":
     main()
