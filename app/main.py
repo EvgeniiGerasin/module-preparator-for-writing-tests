@@ -1,5 +1,3 @@
-from os import pardir
-import typing
 from lib import lib
 
 import argparse
