@@ -22,6 +22,15 @@ def main():
         help='create new module',
         metavar='<name_module>'
     )
+    parser.add_argument(
+        '-t', '--test_file',
+        type=str,
+        help=(
+            'create test file. name should be like '
+            '"test_name.py"'
+        ),
+        metavar='<name_test_file>'
+    )
     args = parser.parse_args()
 
     # проверка проекта на наличие модулей
@@ -29,13 +38,26 @@ def main():
         lib.check(args.check)
     # создание директории и файлов в каталоге source
     if args.source:
+        if args.test_file:
+            # проверка на наличие нужных параметров от пользователя
+            # если таких нет, то выводим сообщение ошибки
+            # и завершаем работу
+            if not args.path:
+                print(parser.error(
+                    'try "-p <path_to_directiry> -t <name_test_file>"')
+                )
+            # проверка имени тестового файла. Если ошибка, то
+            # выводит сообщение и завершает работу
+            lib.check_name_test_file(args.test_file)
         # проверка на наличие нужных параметров от пользователя
-        # если таких нет, то выводим сообщение ошибки 
+        # если таких нет, то выводим сообщение ошибки
         # и завершаем работу
         if not args.path or not args.source:
             print(parser.error(
                 'try "-p <path_to_directiry> -s <name_module>"'))
         lib.create_sourse_files(args.path, args.source)
+        if args.test_file:
+            lib.create_test_file(args.path, args.test_file, args.source)
 
 
 if __name__ == "__main__":

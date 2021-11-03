@@ -30,8 +30,19 @@ class FileContent:
 
     TEST_CODE_FILE = (
         "from source.{name_module}.task import ???\n"
+        "from config.config_test import DataTest\n"
         "from source.description import Description\n"
         "\n"
         "import allure\n"
         "import pytest\n"
+        "\n"
+        "\n"
+        "@allure.epic('')\n"
+        "@allure.feature('')\n"
+        "class Test???:\n\n"
+        "\t@allure.story('')\n"
+        "\t@allure.title('')\n"
+        "\t@allure.description()\n"
+        "\tdef test_???(self, web_driver):\n\n"
+        "\t\ttask = ???\n"
     )
