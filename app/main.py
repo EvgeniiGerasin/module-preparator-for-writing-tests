@@ -5,7 +5,7 @@ import argparse
 
 def main():
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser('Preparer pattern (version alpha)')
     parser.add_argument(
         '-p', '--path',
         help='path to directory of project',
