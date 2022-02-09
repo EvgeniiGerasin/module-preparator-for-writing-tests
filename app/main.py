@@ -33,6 +33,10 @@ def main():
     )
     args = parser.parse_args()
 
+    # проверка на наличие аргументов иначе открывается справка
+    if not args.path and not args.source and not args.test_file and not args.check:
+        parser.print_help()
+
     # проверка проекта на наличие модулей
     if args.check:
         lib.check(args.check)
