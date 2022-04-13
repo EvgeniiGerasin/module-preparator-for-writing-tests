@@ -15,7 +15,7 @@ class FileContent:
         "from utility.exceptions import InvalidTestConditionsException\n"
         "\n"
         "\n"
-        "class Task???(MainPage):\n"
+        "class Task_(MainPage):\n"
         "\n    pass\n"
     )
     TASK_CODE_FILE = (

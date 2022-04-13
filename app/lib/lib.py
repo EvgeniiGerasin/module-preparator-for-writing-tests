@@ -139,12 +139,13 @@ def create_sourse_files(
     # Если нет - выводим список модулей, которые отсутсвуют
     # и завершаем работу
     exsists_list = _check_exists(path_to, PATHS=_PATHS)
-    flag_exsists = exsists_list[0]
+    # flag_exsists = exsists_list[0]
+    flag_exsists = True
     text_not_exists = exsists_list[1]
 
     if flag_exsists:
         # путь до директории source
-        PATH_TO_SOURSE = path_to + '/source/'
+        PATH_TO_SOURSE = path_to + '/automation/source/'
         # создаем путь до места куда должны положить файлы
         full_path_to_file = (PATH_TO_SOURSE + name_module).replace('//', '/')
         # проверяем существование директории, которую
@@ -242,7 +243,7 @@ def check_name_test_file(name: str):
 def create_test_file(path_to: str, name_file: str, name_module: str):
 
     # путь до директории test
-    PATH_TO_TEST = path_to + '/tests/'
+    PATH_TO_TEST = path_to + '/automation/tests/'
     # создаем путь до места куда должны положить файлы
     full_path_to_file = (PATH_TO_TEST + name_file).replace('//', '/')
     # проверяем существование директории, которую
